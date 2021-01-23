@@ -35,12 +35,13 @@
 <div class="px-3">
     <div class="theme-container">
         <div class="locationHeading">
-            <h2>STORES NEAR:111 1234 1234 </h2>
+            <h2>STORES NEAR: {{storeZip}} </h2>
         </div>
 
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="City, State or ZipCode" [(ngModel)]="storeZip"><mat-icon>search</mat-icon>
+            <input matInput placeholder="City, State or ZipCode" [(ngModel)]="storeZip">
         </mat-form-field>
+        <mat-icon style="margin: -20px;">search</mat-icon>
         
         <div *ngFor="let loc of locationList | filter:storeZip">
             <div class="locationContainer">
