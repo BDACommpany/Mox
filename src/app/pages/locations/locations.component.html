@@ -1,0 +1,70 @@
+<!-- <app-header-image *ngIf="settings.header == 'image'" 
+                [backgroundImage]="'assets/images/others/homepage.jpg'"
+                [bgImageAnimate]="true"
+                [contentOffsetToTop]="true"
+                [title]="'Welcome to Restaurant'"
+                [desc]="'Start an Order'"
+                [isLocationPage]="true"
+                [fullscreen]="false">
+</app-header-image>  -->
+<!-- <div class="container" >
+    <div class="row">
+        <div class="col-md-12 locationHeading">
+            <h2>STORES NEAR:111 1234 1234 <button type="button" class="btn btn-primary" (click)="back()">Back</button></h2>
+            <span style="float: right;">Board your location you provided <a href="javascript:void(0)">Edit</a></span>
+        </div>
+        <ng-container *ngFor="let loc of locationList">
+            <div class="col-md-12 locationContainer ">
+                <h3> 3851 W.Oakland Park</h3>
+                <h5> Lakes, F1</h5>
+                <span> Lakes, F1</span><br>
+                <span>Id: {{loc.id}}</span><br>
+                <span>Company Id: {{loc.companyId}}</span><br>
+                <span>Store Id: {{loc.storeId}}</span><br>
+                <a href="javascript:void(0)">more info</a>
+                <div class="btn-fl-r">
+                    <i class="fa fa-car " style="color: blue;"></i><button>DOMINO'S CARSIDE DELIVERY</button>
+                    <i class="fa fa-shopping-cart" style="color: blue;"></i><button> STORE PICKUP</button>
+                </div>              
+                
+            </div>
+        </ng-container>
+    </div>
+</div> -->
+
+<div class="px-3">
+    <div class="theme-container">
+        <div class="locationHeading">
+            <h2>STORES NEAR:111 1234 1234 </h2>
+        </div>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="City, State or ZipCode" [(ngModel)]="storeZip"><mat-icon>search</mat-icon>
+        </mat-form-field>
+        
+        <div *ngFor="let loc of locationList | filter:storeZip">
+            <div class="locationContainer">
+                <div class="btn-fl-r">
+                    <span class="material-icons" style="color: blue; margin: 15px;">
+                        directions_car
+                        </span>
+                    <button mat-flat-button color="warn" type="submit" style="margin: 15px 15px 0px 0px;"> DELIVERY</button><br>
+                    <span class="material-icons" style="color: blue; margin: 15px;">
+                        storefront
+                        </span>
+                    <button mat-flat-button color="warn" type="submit" style="margin: 15px 15px 0px 0px;">STORE
+                        PICKUP</button>
+                </div>
+                <div style="margin: 10px;">
+                    <h3>{{loc.storeName}}</h3>
+                    <h4>{{loc.storeAddress}}</h4>
+                    <ng-container *ngIf="loc.storeCity || loc.storeState || loc.storeZip">
+                        <span *ngIf="loc.storeCity">{{loc.storeCity}} </span> <span *ngIf="loc.storeState">, {{loc.storeState}}</span> <span *ngIf="loc.storeZip">, {{loc.storeZip}}</span><br>
+                    </ng-container>                    
+                    <span *ngIf="loc.storePhone">{{loc.storePhone}}</span><br>
+                    <a href="javascript:void(0)" style="color: blue;">more info</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
