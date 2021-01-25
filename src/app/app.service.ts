@@ -203,7 +203,7 @@ export class AppService {
 
   public filterData(data:any, categoryId:number, sort?:string, page?:number, perPage?:number){  
     if(categoryId){
-      data = data.filter((item:any) => item.categoryId == categoryId);
+      data = data.filter((item:any) => item.departmentId == categoryId);
     }   
 
     //for show more properties mock data 

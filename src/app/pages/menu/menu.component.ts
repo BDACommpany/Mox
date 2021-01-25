@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute } from '@angular/router';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar'; 
 import { Subscription } from 'rxjs/internal/Subscription';
 import { filter, map } from 'rxjs/operators';
 import { MenuItem, Pagination } from 'src/app/app.models';
 import { AppService } from 'src/app/app.service';
 import { AppSettings, Settings } from 'src/app/app.settings';
+import { DeptService } from 'src/app/service/dept.service';
+import { InventoryService } from 'src/app/service/inventory.service';
 
 @Component({
   selector: 'app-menu',
@@ -22,7 +25,7 @@ export class MenuComponent implements OnInit {
     wheelPropagation:true
   };  
   public menuItems: MenuItem[] = [];
-  public categories:any[] = [];
+  public categories : any;
   public viewType: string = 'list';
   public viewCol: number = 100;
   public count: number = 12;
@@ -33,7 +36,20 @@ export class MenuComponent implements OnInit {
   public watcher: Subscription;
   public settings: Settings;
 
-  constructor(public appSettings:AppSettings, public appService:AppService, public mediaObserver: MediaObserver) {
+  public storeId: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    public appSettings:AppSettings,
+    public appService:AppService,
+    public mediaObserver: MediaObserver,
+    public deptService:DeptService,
+    public inventoryService:InventoryService,
+    ) {
+      this.route.queryParams.subscribe(params => {
+        this.storeId = params['storeId'];
+    });
+
     this.settings = this.appSettings.settings; 
     this.watcher = mediaObserver.asObservable()
     .pipe(filter((changes: MediaChange[]) => changes.length > 0), map((changes: MediaChange[]) => changes[0]))
@@ -66,6 +82,7 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.getCategories();
     this.getMenuItems();
+    console.log(this.selectedCategoryId);
   }
 
   ngOnDestroy(){ 
@@ -73,9 +90,13 @@ export class MenuComponent implements OnInit {
   }
 
   public getCategories(){
-    this.appService.getCategories().subscribe(categories=>{
+    this.deptService.getDeptStores(this.storeId).subscribe(categories=>{
       this.categories = categories;
-      this.appService.Data.categories = categories;
+      console.log(this.categories)
+      this.selectedCategoryId = this.categories[0].id;
+      this.selectCategory(this.selectedCategoryId);
+        console.log(this.selectedCategoryId);
+      // this.appService.Data.categories = categories;
     })
   } 
   public selectCategory(id:number){
@@ -86,14 +107,18 @@ export class MenuComponent implements OnInit {
     this.sidenav.close();
   }
   public onChangeCategory(event:any){ 
+    console.log(event);
     this.selectCategory(event.value);
   }
 
   public getMenuItems(){
-    this.appService.getMenuItems().subscribe(data => {
+    this.inventoryService.getAllInventories(this.selectedCategoryId).subscribe(data => {
       // this.menuItems = this.appService.shuffleArray(data);
       // this.menuItems = data;
+      console.log(data);
+
       let result = this.filterData(data); 
+      console.log(result);
       if(result.data.length == 0){
         this.menuItems.length = 0;
         this.pagination = new Pagination(1, this.count, null, 2, 0, 0);  

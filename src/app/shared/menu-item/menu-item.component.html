@@ -1,18 +1,18 @@
 <mat-card class="menu-item p-0" [fxLayout]="(viewType == 'grid') ? 'column' : 'row'" [ngClass]="[viewType + '-item', 'column-'+column]">   
     <div fxFlex="100" [fxShrink]="(viewType == 'grid') ? '3' : '2'" class="thumbnail-section">
-        <mat-chip-list *ngIf="menuItem.discount">
+        <!-- <mat-chip-list *ngIf="menuItem.discount">
             <mat-chip color="warn" selected="true">{{menuItem.discount}}% OFF</mat-chip>
-        </mat-chip-list> 
+        </mat-chip-list>  -->
         <div *ngIf="lazyLoad">
-            <img [attr.data-src]="menuItem.image.medium" class="w-100 d-block swiper-lazy">
+            <img [attr.data-src]="menuItem.imgUrl" class="w-100 d-block swiper-lazy">
             <div class="swiper-lazy-preloader"></div>  
         </div>  
-        <img *ngIf="!lazyLoad" [src]="menuItem.image.medium" class="w-100 d-block">  
+        <img *ngIf="!lazyLoad" [src]="menuItem.imgUrl" class="w-100 d-block">  
     </div>  
     <div fxFlex="100" class="p-3"> 
         <div fxLayout="column" fxLayoutAlign="start stretch" class="h-100">
             <mat-card-content class="mb-0">
-                <h1 class="title"><a [routerLink]="['/menu', menuItem.id]">{{menuItem.name}}</a></h1>   
+                <h1 class="title"><a [routerLink]="['/menu', menuItem.id]">{{menuItem.itemname}}</a></h1>   
                 <div class="mt-2"> 
                     <!-- <p>{{menuItem.description}}</p>  -->
                     <div *ngIf="viewType == 'list'" fxShow="false" fxShow.gt-sm="true">
@@ -70,13 +70,13 @@
                 </div>   -->
                 <div fxLayout="row" fxLayoutAlign="space-between center" class="divider mt-1"> 
 
-                    <h2 *ngIf="!menuItem.discount" class="primary-color"> 
-                        {{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}  
+                    <h2 *ngIf="menuItem.itemprice" class="primary-color"> 
+                        {{menuItem.itemprice | currency : 'USD' : 'symbol' : '1.2-2'}}  
                     </h2> 
-                    <h2 *ngIf="menuItem.discount">  
-                        <span class="text-muted old-price">{{menuItem.price | currency : 'USD' : 'symbol' : '1.2-2'}}</span> 
-                        <span class="primary-color mx-2">{{ (menuItem.price - (menuItem.price * (menuItem.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
-                    </h2> 
+                    <!-- <h2 *ngIf="menuItem.itemprice">  
+                        <span class="text-muted old-price">{{menuItem.itemprice | currency : 'USD' : 'symbol' : '1.2-2'}}</span> 
+                        <span class="primary-color mx-2">{{ (menuItem.itemprice - (menuItem.itemprice * (menuItem.discount / 100))) | currency : 'USD' : 'symbol' : '1.2-2'}}</span>
+                    </h2>  -->
 
 
                     <div class="text-muted">  

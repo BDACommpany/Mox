@@ -34,6 +34,10 @@ export class LocationsComponent implements OnInit {
   back() {
     this.router.navigate(['/orderList']);
   }
+
+  getDepts(storeId: any) {
+    this.router.navigate(['/menu'], { queryParams: { storeId: storeId } });
+  }
   
   // public slides = []; 
   // public specialMenuItems:Array<MenuItem> = [];

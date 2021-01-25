@@ -32,7 +32,7 @@
                                 All Categories
                             </mat-button-toggle>
                             <mat-button-toggle *ngFor="let category of categories" [value]="category.id" class="letter">
-                                {{category.name}}
+                                {{category.deptName}}
                             </mat-button-toggle>
                         </mat-button-toggle-group>
                     </div>
@@ -44,6 +44,7 @@
                                                 (onChangeViewType)="changeViewType($event)"> 
                         </app-menu-items-toolbar> 
                     </div>
+                    <!-- {{menuItems | json}} -->
 
                     <div *ngFor="let menuItem of menuItems" [fxFlex]="(viewType=='grid') ? viewCol : 100"  class="item">  
                         <app-menu-item [menuItem]="menuItem" [viewType]="viewType" [viewColChanged]="viewCol"></app-menu-item>  

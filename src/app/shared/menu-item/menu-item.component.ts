@@ -20,6 +20,7 @@ export class MenuItemComponent implements OnInit {
     public appService:AppService) { }
 
   ngOnInit(): void {
+    console.log(this.menuItem);
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}){  
