@@ -80,9 +80,12 @@ export class OrderStatus {
 export class MenuItem {
     constructor(public id: number,
                 public name: string,
+                public itemname: string,
                 public description: string,
                 public price: number,
+                public itemprice: number,
                 public image: MenuItemImage,
+                public imgUrl: string,
                 public discount: number,
                 public ratingsCount: number,
                 public ratingsValue: number,
