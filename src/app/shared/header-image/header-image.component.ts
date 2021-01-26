@@ -15,7 +15,6 @@ export class HeaderImageComponent implements OnInit {
   @Input('title') title:any;
   @Input('desc') desc:any;
   @Input('isHomePage') isHomePage:boolean = false;
-  @Input('isLocationPage') isLocationPage:boolean = false;
   @Input('fullscreen') fullscreen: boolean = false; 
   public bgImage:any;
   public settings: Settings;

@@ -7,10 +7,7 @@
         <div *ngIf="isHomePage" ngClass.gt-xs="mt-4" ngClass.xs="mt-3"> 
           <a mat-raised-button routerLink="/menu">{{ 'Pick-Up' | translate }}</a>
           <a mat-raised-button color="primary" routerLink="/delivery">{{ 'Delivery' | translate }}</a> 
-        </div>
-        <div *ngIf="isLocationPage" ngClass.gt-xs="mt-4" ngClass.xs="mt-3"> 
-          <a mat-raised-button routerLink="/menu">{{ 'Pick-Up' | translate }}</a>
-          <a mat-raised-button color="primary" routerLink="/delivery">{{ 'Delivery' | translate }}</a> 
+          <a mat-raised-button color="primary" routerLink="/location">{{ 'Order' | translate }}</a> 
         </div>
     </div>
 </div>
